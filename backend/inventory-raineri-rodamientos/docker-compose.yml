@@ -1,0 +1,31 @@
+services:
+  api_raineri_rodamientos:
+    build: .
+    ports:
+      - 9090:9090
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/bd_raineri_rodamientos
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - database
+    networks:
+      - red_raineri_rodamientos
+
+  database:
+    image: mysql:latest
+    restart: always
+    container_name: mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bd_raineri_rodamientos
+    ports:
+      - 3307:3306  # Mapea el puerto local 3307 al puerto 3306 del contenedor
+    volumes:
+      - /Documents/vol:/var/lib/mysql
+    networks:
+      - red_raineri_rodamientos
+
+networks:
+  red_raineri_rodamientos:
+    driver: bridge

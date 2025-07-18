@@ -25,13 +25,13 @@ public class CategoryController {
 
 
     @GetMapping
-    public ResponseEntity<? extends ApiResponse<?>> findAllCategories(){
+    public ResponseEntity<? extends ApiResponse<?>> findAllCategories() {
         List<Category> categories = categoryService.findAll();
         return new ResponseEntity<>(new ApiResponse<>(
                 true,
                 HttpStatus.OK.value(),
                 "Listado de categorias",
                 categories
-        ),HttpStatus.OK);
+        ), HttpStatus.OK);
     }
 }
